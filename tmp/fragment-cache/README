@@ -1,0 +1,1 @@
+This folder contains fragment cache data

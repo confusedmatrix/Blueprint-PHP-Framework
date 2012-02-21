@@ -1,0 +1,1 @@
+This folder contains page cache data

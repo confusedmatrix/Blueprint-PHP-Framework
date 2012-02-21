@@ -1,0 +1,11 @@
+Requirements of the Blueprint framework
+
+- Rename .htaccess.default to .htaccess
+- Set RewriteBase in /public/.htaccess
+- Set paths in /etc/constants.php
+- Rename /etc/config.default.php to /etc/config.php
+- Set settings in /etc/config.php
+- You must load the /etc/tables.sql into the database
+- Register any namespaces in /app/ that you want to use in your application
+	$router->registerRouteMap('{namespace}');
+

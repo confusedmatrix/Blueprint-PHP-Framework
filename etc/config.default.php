@@ -42,7 +42,7 @@ $config['defaults'] = array(
 		'h1'				=> 'Blueprint Framework',
 		'css'				=> array(
 			'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css',
-			$config['base'] . 'css/blueprint.css'
+			$config['base'] . 'css/bootstrap.min.css'
 		),
 		'js'				=> array(
 			'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js',

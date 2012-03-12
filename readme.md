@@ -11,6 +11,6 @@ To get started:
 * Set settings in /etc/config.php
 * You must load the /etc/tables.sql into the database
 * Register any namespaces in /app/ that you want to use in your application
-	$router->registerRouteMap('{namespace}');
+    $router->registerRouteMap('{namespace}');
 * Start building
 

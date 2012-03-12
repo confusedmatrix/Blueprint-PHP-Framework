@@ -17,20 +17,20 @@
 ---------------------------------------------------------------------
 
 Class name and class filenames must be camel case to avoid problems. 
-	
+    
 e.g localhost/css-test maps to /app/{namespace}/Controller/CssTest.php and calls CssTest();
-	
+    
 Controllers, models, views and forms must all extend the abstract version of class from Blueprint.
 
 e.g. CssTest should extend Controller.
-	
+    
 Follow the MVC concept as much as possible, even if it seems like a 
 chore at the time, it will be so much easier in the long run.
-	
+    
 * Controllers sole responsibility is to tie the request to a model and a view, so keep them light.
 * Models should do all the grunt work. Create logical methods and don't let them get too big.
 * Views should pass all the data etc to the template to be output to the browser.
 * Templates should only contain the most rudimentary of PHP and a web designer with very little PHP experience should be able to work with them with only the knowledge of what variables they need for the data they want to display.
 * This separation of concerns makes it much easier for designers and developers to work together as well as making it easier to debug problems and keep the application flexible to modify.
 * For the love of god don't do business code in the template files!
-	
+    

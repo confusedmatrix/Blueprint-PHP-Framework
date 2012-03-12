@@ -11,6 +11,6 @@ use Blueprint\Model\Model;
  */
 class Index extends Model {
 
-	
+    
 
 }

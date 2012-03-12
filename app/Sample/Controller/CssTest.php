@@ -12,27 +12,27 @@ use Sample\View;
  */
 class CssTest extends Controller {
 
-	/**
-	 * __construct function.
-	 * 
-	 * @access public
-	 * @return void
-	 */
-	public function __construct() {
-		
-		$this->view = new View\Index();
-		
-	}
-	
-	/**
-	 * setContainer function.
-	 * 
-	 * @access public
-	 * @param mixed $container
-	 * @return void
-	 */
-	public function setContainer($container) {
-	
+    /**
+     * __construct function.
+     * 
+     * @access public
+     * @return void
+     */
+    public function __construct() {
+        
+        $this->view = new View\Index();
+        
+    }
+    
+    /**
+     * setContainer function.
+     * 
+     * @access public
+     * @param mixed $container
+     * @return void
+     */
+    public function setContainer($container) {
+    
         parent::setContainer($container);
         
         $this->view->setContainer($this->container);
@@ -40,18 +40,18 @@ class CssTest extends Controller {
         $this->page = $this->container->get('page');
         $this->page->h1 = 'Title 01 Heading';
     
-	}
+    }
 
-	/**
-	 * indexAction function.
-	 * 
-	 * @access public
-	 * @return void
-	 */
-	public function indexAction() {
-	
-		echo $this->view->render("lipsum.php");
-		
-	}
+    /**
+     * indexAction function.
+     * 
+     * @access public
+     * @return void
+     */
+    public function indexAction() {
+    
+        echo $this->view->render("lipsum.php");
+        
+    }
 
 }

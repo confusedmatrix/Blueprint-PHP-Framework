@@ -22,25 +22,25 @@ namespace Blueprint\Controller;
  */
 abstract class Controller {
 
-	/**
-	 * container
-	 * 
-	 * @var mixed
-	 * @access protected
-	 */
-	protected $container;
-	
-	/**
-	 * setContainer function.
-	 * 
-	 * @access public
-	 * @param mixed $container
-	 * @return void
-	 */
-	public function setContainer($container) {
-	
-		$this->container = $container;
-	
-	}
-	
+    /**
+     * container
+     * 
+     * @var mixed
+     * @access protected
+     */
+    protected $container;
+    
+    /**
+     * setContainer function.
+     * 
+     * @access public
+     * @param mixed $container
+     * @return void
+     */
+    public function setContainer($container) {
+    
+        $this->container = $container;
+    
+    }
+    
 }

@@ -1,19 +1,19 @@
 <?php
 
 if (DEBUG === true) {
-	
-	ini_set('display_errors', 1);
-	error_reporting(E_ALL);
-	$mt = microtime(1);
-	
+    
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+    $mt = microtime(1);
+    
 }
 
 use Blueprint\Autoloader\Autoloader;
 require(LIB_DIR . 'Blueprint/Autoloader/Autoloader.php');
 
 /*  
-	All classes in /lib/ and /app/ will be automatically required
-	by the autoloader upon instantiation
+    All classes in /lib/ and /app/ will be automatically required
+    by the autoloader upon instantiation
 */
 Autoloader::registerAutoloadPath(LIB_DIR);
 Autoloader::registerAutoloadPath(APP_DIR);
@@ -32,8 +32,8 @@ use Blueprint\Router\Router;
 
 // Log all uncaught exceptions
 function exceptionHandler($e) {
-	
-	Logging::log($e);
+    
+    Logging::log($e);
 
 }
 
@@ -69,12 +69,12 @@ $router->route();
 
 if (DEBUG === true) {
 
-	echo '<br />Processed in ' . 
-	round((microtime(1) - $mt), 3) . 
-	' seconds<br />' . 
-	number_format(memory_get_peak_usage() / 1024, 0, ".", ",") . 
-	" Kb's used";
-	
+    echo '<br />Processed in ' . 
+    round((microtime(1) - $mt), 3) . 
+    ' seconds<br />' . 
+    number_format(memory_get_peak_usage() / 1024, 0, ".", ",") . 
+    " Kb's used";
+    
 }
 
 ?>

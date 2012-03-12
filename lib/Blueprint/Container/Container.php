@@ -22,15 +22,15 @@ namespace Blueprint\Container;
  */
 class Container {
 
-	/**
-	 * values
-	 *
-	 * Holds the dependencies.
-	 * 
-	 * @var mixed
-	 * @access protected
-	 */
-	protected $values;
+    /**
+     * values
+     *
+     * Holds the dependencies.
+     * 
+     * @var mixed
+     * @access protected
+     */
+    protected $values;
 
     /**
      * __construct function.
@@ -61,7 +61,7 @@ class Container {
 
         $this->values[$key] = $value;
 
-	}
+    }
 
     /**
      * get function.
@@ -75,9 +75,9 @@ class Container {
     public function get($key) {
         
         if (array_key_exists($key, $this->values))
-        	return $this->values[$key];
+            return $this->values[$key];
     
-	}
+    }
 
     /**
      * exists function.
@@ -92,18 +92,18 @@ class Container {
     
         return isset($this->values[$key]);
         
-	}
-	
-	/**
-	 * unsetKey function.
-	 *
-	 * Removes the dependency from the container.
-	 * 
-	 * @access public
-	 * @param mixed $key
-	 * @return void
-	 */
-	public function unsetKey($key) {
+    }
+    
+    /**
+     * unsetKey function.
+     *
+     * Removes the dependency from the container.
+     * 
+     * @access public
+     * @param mixed $key
+     * @return void
+     */
+    public function unsetKey($key) {
 
         unset($this->values[key]);
 

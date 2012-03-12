@@ -21,104 +21,104 @@ namespace Blueprint\Authentication;
  * @author Christopher <chris@jooldesign.co.uk>
  */
 class Authentication {
-	
-	/**
-	 * database
-	 * 
-	 * @var mixed
-	 * @access protected
-	 */
-	protected $database;
-	
-	
-	/**
-	 * session
-	 * 
-	 * @var mixed
-	 * @access protected
-	 */
-	protected $session;
-	
-	
-	/**
-	 * __construct function.
-	 *
-	 * Loads dependencies.
-	 * 
-	 * @access public
-	 * @param mixed $database
-	 * @param mixed $session
-	 * @return void
-	 */
-	public function __construct($database, $session) {
-	
-		$this->database = $database;
-		$this->session = $session;
-	
-	}
-	
-	
-	/**
-	 * login function.
-	 *
-	 * Attempts to authenticate user against the user table in the 
-	 * database.
-	 * 
-	 * @access public
-	 * @param mixed $username
-	 * @param mixed $password
-	 * @return void
-	 */
-	public function login($username, $password) {
-	
-		$options = array(
-		
-			'table' 	=> 'users',
-			'select'	=> array(
-				'user_id',
-				'user_name', 
-				'password'
-			),
-			'where'	=> array(
-				array(
-					'user_name',
-					'=',
-					$username
-				),
-				array(
-					'password',
-					'=',
-					sha1($password)
-				)
-			)
-		
-		);
-	
-		$row = $this->database->fetchRow($options);
-		
-		if (empty($row))
-			return false;
-			
-		$this->session->set('logged_in', true);
-		$this->session->set('user_id', $row['user_id']);
-		
-		return true;
-	
-	}
-	
-	/**
-	 * logout function.
-	 *
-	 * Removes state from the user's session, thus de-authenticating
-	 * the user.
-	 * 
-	 * @access public
-	 * @return void
-	 */
-	public function logout() {
-	
-		$this->session->endSession();
-	
-	}
+    
+    /**
+     * database
+     * 
+     * @var mixed
+     * @access protected
+     */
+    protected $database;
+    
+    
+    /**
+     * session
+     * 
+     * @var mixed
+     * @access protected
+     */
+    protected $session;
+    
+    
+    /**
+     * __construct function.
+     *
+     * Loads dependencies.
+     * 
+     * @access public
+     * @param mixed $database
+     * @param mixed $session
+     * @return void
+     */
+    public function __construct($database, $session) {
+    
+        $this->database = $database;
+        $this->session = $session;
+    
+    }
+    
+    
+    /**
+     * login function.
+     *
+     * Attempts to authenticate user against the user table in the 
+     * database.
+     * 
+     * @access public
+     * @param mixed $username
+     * @param mixed $password
+     * @return void
+     */
+    public function login($username, $password) {
+    
+        $options = array(
+        
+            'table'     => 'users',
+            'select'    => array(
+                'user_id',
+                'user_name', 
+                'password'
+            ),
+            'where'    => array(
+                array(
+                    'user_name',
+                    '=',
+                    $username
+                ),
+                array(
+                    'password',
+                    '=',
+                    sha1($password)
+                )
+            )
+        
+        );
+    
+        $row = $this->database->fetchRow($options);
+        
+        if (empty($row))
+            return false;
+            
+        $this->session->set('logged_in', true);
+        $this->session->set('user_id', $row['user_id']);
+        
+        return true;
+    
+    }
+    
+    /**
+     * logout function.
+     *
+     * Removes state from the user's session, thus de-authenticating
+     * the user.
+     * 
+     * @access public
+     * @return void
+     */
+    public function logout() {
+    
+        $this->session->endSession();
+    
+    }
 
 }

@@ -17,40 +17,40 @@ namespace Blueprint\Logging;
  */
 class Logging {
 
-	/**
-	 * log function.
-	 * 
-	 * @access public
-	 * @static
-	 * @param \Exception $e
-	 * @return void
-	 */
-	public static function log(\Exception $e) {
-	
-		$error = 'Error on line ' . $e->getLine() . 
-			 	 ' in ' . $e->getFile() . ': ' . $e->getMessage();
-	
-		switch (LOG_TYPE) {
-		
-			case 'output':
-			
-				echo $error;
-				break;
-				
-			case 'file':
-				
-				$error = date('c', time()) . ': ' . $error . "\n";
-				if (file_put_contents(VAR_DIR . 'log/error.log', $error, FILE_APPEND))
-					echo 'An error occurred. The error has been logged.';
-				
-				break;
-				
-			default:
-				
-				break;
-		
-		}
-	
-	}
+    /**
+     * log function.
+     * 
+     * @access public
+     * @static
+     * @param \Exception $e
+     * @return void
+     */
+    public static function log(\Exception $e) {
+    
+        $error = 'Error on line ' . $e->getLine() . 
+                  ' in ' . $e->getFile() . ': ' . $e->getMessage();
+    
+        switch (LOG_TYPE) {
+        
+            case 'output':
+            
+                echo $error;
+                break;
+                
+            case 'file':
+                
+                $error = date('c', time()) . ': ' . $error . "\n";
+                if (file_put_contents(VAR_DIR . 'log/error.log', $error, FILE_APPEND))
+                    echo 'An error occurred. The error has been logged.';
+                
+                break;
+                
+            default:
+                
+                break;
+        
+        }
+    
+    }
 
 }

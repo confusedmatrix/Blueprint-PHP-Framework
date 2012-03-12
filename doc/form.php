@@ -1,12 +1,12 @@
 <?php
 
 /*
-	This file shows how to use the databse class to 
-	select, insert, update and delete data.
-	
-	This file is not designed to be run but to just 
-	give an idea of the different ways to use the 
-	database.
+    This file shows how to use the databse class to 
+    select, insert, update and delete data.
+    
+    This file is not designed to be run but to just 
+    give an idea of the different ways to use the 
+    database.
 */
 
 /***************** STEP 1 *****************/
@@ -14,12 +14,12 @@
 // Setup the form (method 1)
 $form = new Form(
 
-	'#', 					// form handler URL
-	'post',					// form method
-	array(					// form attributes
-		'id' 	=> 'form1',
-		'name'	=> 'form1'
-	)
+    '#',                     // form handler URL
+    'post',                    // form method
+    array(                    // form attributes
+        'id'     => 'form1',
+        'name'    => 'form1'
+    )
 
 );
 
@@ -38,33 +38,33 @@ $form->comments = new FormField('textarea', 'comments', 'Comments');
 
 $form->colour = new FormField(
 
-	'select', 						// field type
-	'colour', 						// field name
-	'Choose a colour', 				// field label
-	array(							// field attributes
-		'multiple' => 'multiple'	
-	),
-	array(							// field options
-		'Red' 		=> 'red',
-		'Green'		=> 'green',		
-		'Blue'		=> 'blue',
-		'Yellow'	=> 'yellow'
-	),
-	array(							// pre-selected field options
-		'Blue',
-		'Green'
-	)
+    'select',                         // field type
+    'colour',                         // field name
+    'Choose a colour',                 // field label
+    array(                            // field attributes
+        'multiple' => 'multiple'    
+    ),
+    array(                            // field options
+        'Red'         => 'red',
+        'Green'        => 'green',        
+        'Blue'        => 'blue',
+        'Yellow'    => 'yellow'
+    ),
+    array(                            // pre-selected field options
+        'Blue',
+        'Green'
+    )
 
 );
 
 $form->submit = new FormField(
-	
-	'submit', 						// field type
-	'submit',						// field name
-	false,							// field label
-	array(							// field attributes
-		'value' => 'Send'
-	)
+    
+    'submit',                         // field type
+    'submit',                        // field name
+    false,                            // field label
+    array(                            // field attributes
+        'value' => 'Send'
+    )
 
 );
 
@@ -72,31 +72,31 @@ $form->submit = new FormField(
 // Build form (method 2)
 $form->addFields(
 
-	array(
-		'name' 		=> array('text', 'name', 'Name'),
-		'email' 	=> array('text', 'email', 'Email Address'),
-		'comments' 	=> array('textarea', 'comments', 'Comments'),
-		'colour'	=> array(
-			'select', 						// field type
-			'colour', 						// field name
-			'Choose a colour', 				// field label
-			array(							// field attributes
-				'multiple' => 'multiple'	
-			),
-			array(							// field options
-				'Red' 		=> 'red',
-				'Green'		=> 'green',		
-				'Blue'		=> 'blue',
-				'Yellow'	=> 'yellow'
-			),
-			array(							// pre-selected field options
-				'Blue',
-				'Green'
-			)	
-		),
-		'submit' => array('submit', 'submit', false, array('value' => 'Send'))
-	)
-	
+    array(
+        'name'         => array('text', 'name', 'Name'),
+        'email'     => array('text', 'email', 'Email Address'),
+        'comments'     => array('textarea', 'comments', 'Comments'),
+        'colour'    => array(
+            'select',                         // field type
+            'colour',                         // field name
+            'Choose a colour',                 // field label
+            array(                            // field attributes
+                'multiple' => 'multiple'    
+            ),
+            array(                            // field options
+                'Red'         => 'red',
+                'Green'        => 'green',        
+                'Blue'        => 'blue',
+                'Yellow'    => 'yellow'
+            ),
+            array(                            // pre-selected field options
+                'Blue',
+                'Green'
+            )    
+        ),
+        'submit' => array('submit', 'submit', false, array('value' => 'Send'))
+    )
+    
 );
 
 
@@ -124,7 +124,7 @@ $form->submit->setValue('Send');
 
 // validate the form on submission
 if ($form->isSubmitted())
-	$form->validate();
+    $form->validate();
 
 // Render form (method 1)
 echo $form->renderFormStartTag();

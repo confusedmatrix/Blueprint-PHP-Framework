@@ -22,79 +22,79 @@ namespace Blueprint\View;
  */
 class PageView extends View {
 
-	/**
-	 * page
-	 * 
-	 * @var mixed
-	 * @access protected
-	 */
-	protected $page;
-	
-	/**
-	 * setContainer function.
-	 * 
-	 * @access public
-	 * @param mixed $container
-	 * @return void
-	 */
-	public function setContainer($container) {
-	
-		parent::setContainer($container);
+    /**
+     * page
+     * 
+     * @var mixed
+     * @access protected
+     */
+    protected $page;
+    
+    /**
+     * setContainer function.
+     * 
+     * @access public
+     * @param mixed $container
+     * @return void
+     */
+    public function setContainer($container) {
+    
+        parent::setContainer($container);
 
-		$this->page = $this->container->get('page');
+        $this->page = $this->container->get('page');
 
-	}
+    }
 
-	/**
-	 * pageInfo function.
-	 *
-	 * Provides access to page properties.
-	 * 
-	 * @access public
-	 * @param mixed $key
-	 * @param string $default (default: '')
-	 * @param bool $echo (default: true)
-	 * @return void
-	 */
-	public function pageInfo($key, $default='', $echo=true) {
-	
-		$val = !empty($this->page->$key) ? $$this->page->$key : $default;
-		
-		if ($echo === true)
-			echo $val;
-		else
-			return $val;
-	
-	}
-	
-	/**
-	 * displayCss function.
-	 *
-	 * Renders the HTML for all the registered CSS files.
-	 * 
-	 * @access public
-	 * @return void
-	 */
-	public function displayCss() {
-	
-		foreach ($this->page->css as $css)
-			echo '<link rel="stylesheet" type="text/less" href="' . $css . '" />' . "\n";
-	
-	}
-	
-	/**
-	 * displayJs function.
-	 *
-	 * Renders the HTML for all the registered JavaScript files.
-	 * 
-	 * @access public
-	 * @return void
-	 */
-	public function displayJs() {
-	
-		foreach ($this->page->js as $js)
-			echo '<script type="text/javascript" src="' . $js . '"></script>' . "\n";		
-	
-	}
-	
+    /**
+     * pageInfo function.
+     *
+     * Provides access to page properties.
+     * 
+     * @access public
+     * @param mixed $key
+     * @param string $default (default: '')
+     * @param bool $echo (default: true)
+     * @return void
+     */
+    public function pageInfo($key, $default='', $echo=true) {
+    
+        $val = !empty($this->page->$key) ? $$this->page->$key : $default;
+        
+        if ($echo === true)
+            echo $val;
+        else
+            return $val;
+    
+    }
+    
+    /**
+     * displayCss function.
+     *
+     * Renders the HTML for all the registered CSS files.
+     * 
+     * @access public
+     * @return void
+     */
+    public function displayCss() {
+    
+        foreach ($this->page->css as $css)
+            echo '<link rel="stylesheet" type="text/less" href="' . $css . '" />' . "\n";
+    
+    }
+    
+    /**
+     * displayJs function.
+     *
+     * Renders the HTML for all the registered JavaScript files.
+     * 
+     * @access public
+     * @return void
+     */
+    public function displayJs() {
+    
+        foreach ($this->page->js as $js)
+            echo '<script type="text/javascript" src="' . $js . '"></script>' . "\n";        
+    
+    }
+    
 }

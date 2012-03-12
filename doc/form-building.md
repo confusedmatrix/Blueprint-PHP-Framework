@@ -15,7 +15,7 @@ This is reference for all the options that can be used to build form fields and 
 * image
 * reset
 * submit
-	
+    
 ###Validation rules:
 * required
 * less_than
@@ -32,5 +32,5 @@ This is reference for all the options that can be used to build form fields and 
 * website
 * uri
 * postcode
-	
-	
+    
+    

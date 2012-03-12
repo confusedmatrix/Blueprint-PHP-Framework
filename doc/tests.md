@@ -7,4 +7,4 @@ The Blueprint framework comes bundled with a few simple test controllers, models
 * localhost/blueprint/test/test
 * localhost/blueprint/test/test/{1-5}
 * localhost/blueprint/secured
-	
+    

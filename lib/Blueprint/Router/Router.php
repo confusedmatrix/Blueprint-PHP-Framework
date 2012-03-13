@@ -334,10 +334,20 @@ class Router {
             
             }
             
-            $this->controller = new $this->controller_name;
-            $this->controller->setContainer($this->app);
+            if (method_exists($this->controller_name, $this->action_name)) {
+                
+                $this->controller = new $this->controller_name;
+                $this->controller->setContainer($this->app);
             
-            call_user_func_array(array($this->controller, $this->action_name), $this->params);
+                call_user_func_array(array($this->controller, $this->action_name), $this->params);
+                
+            } else {
+                
+                header('HTTP/1.0 404 Not Found');
+                header('Status: 404 Not Found');
+                echo '<h1>404 Not Found</h1>';
+                
+            }
         
         } else {
         

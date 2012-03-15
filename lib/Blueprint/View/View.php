@@ -76,18 +76,13 @@ abstract class View {
      * @access public
      * @param mixed $key
      * @param string $default (default: '')
-     * @param bool $echo (default: true)
      * @return void
      */
-    public function siteInfo($key, $default='', $echo=true) {
+    public function siteInfo($key, $default='') {
     
         $cfg = $this->container->get('config');
         $val = !empty($cfg->$key) ? $cfg->$key : $default;
-        
-        if ($echo === true)
-            echo $val;
-        else
-            return $val;
+        return $val;
     
     }
     

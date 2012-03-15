@@ -6,7 +6,7 @@
 
   </div><!-- close container -->
   
-  <?php $this->displayJs(); ?>
+  <?php echo $this->getJs(); ?>
 
 </body>
 </html>

@@ -10,10 +10,7 @@ $p = $this->container->get('page');
 $site = function($key, $default='', $echo=true) use($c) {
     
     $val = !empty($c->$key) ? $c->$key : $default;
-    if ($echo === true)
-        echo $val;
-    else
-        return $val;
+    return $val;
 
 };
 
@@ -24,9 +21,6 @@ $site = function($key, $default='', $echo=true) use($c) {
 $page = function($key, $default='', $echo=true) use($p) {
     
     $val = !empty($p->$key) ? $p->$key : $default;
-    if ($echo === true)
-        echo $val;
-    else
-        return $val;
+    return $val;
 
 };

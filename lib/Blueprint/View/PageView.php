@@ -53,48 +53,49 @@ class PageView extends View {
      * @access public
      * @param mixed $key
      * @param string $default (default: '')
-     * @param bool $echo (default: true)
      * @return void
      */
-    public function pageInfo($key, $default='', $echo=true) {
+    public function pageInfo($key, $default='') {
     
         $val = !empty($this->page->$key) ? $$this->page->$key : $default;
-        
-        if ($echo === true)
-            echo $val;
-        else
-            return $val;
+        return $val;
     
     }
     
     /**
-     * displayCss function.
+     * getCss function.
      *
      * Renders the HTML for all the registered CSS files.
      * 
      * @access public
      * @return void
      */
-    public function displayCss() {
-    
+    public function getCss() {
+        
+        $html = '';
         foreach ($this->page->css as $css)
-            echo '<link rel="stylesheet" type="text/less" href="' . $css . '" />' . "\n";
+            $html .= '<link rel="stylesheet" type="text/less" href="' . $css . '" />' . "\n";
+            
+        return $html;
     
     }
     
     /**
-     * displayJs function.
+     * getJs function.
      *
      * Renders the HTML for all the registered JavaScript files.
      * 
      * @access public
      * @return void
      */
-    public function displayJs() {
-    
+    public function getJs() {
+        
+        $html = '';
         foreach ($this->page->js as $js)
-            echo '<script type="text/javascript" src="' . $js . '"></script>' . "\n";        
+            $html .= '<script type="text/javascript" src="' . $js . '"></script>' . "\n";        
     
+        return $html;
+        
     }
     
 }

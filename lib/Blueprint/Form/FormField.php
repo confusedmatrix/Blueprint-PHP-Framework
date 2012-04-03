@@ -337,6 +337,10 @@ class FormField {
                 foreach ($value as $v)
                     $this->setSelected(array_search($v, $this->options));
             
+            } else {
+            
+                $this->setSelected(array_search($value, $this->options));
+            
             }
         
         } else {

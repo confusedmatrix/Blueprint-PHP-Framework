@@ -402,13 +402,7 @@ class Form {
             
             if (!in_array($field->attrs['type'], array('hidden', 'reset', 'submit'))) {
             
-                $form .= '<div class="control-group';
-                if (!$field->isValid() && $this->valid !== null)
-                    $form .= ' error';
-            
-                $form .= '">';
                 $form .= $field->render() . "\n";
-                $form .= '</div>';
                 
             }
                 

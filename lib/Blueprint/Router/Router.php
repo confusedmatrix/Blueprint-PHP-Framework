@@ -232,7 +232,7 @@ class Router {
     protected function routeByDefault($map) {
     
         $_route = $this->explodeUrl()->parseUrl();
-
+        
         $controller_name = $this->determineToControllerName($_route[0]);
         $controller_name = $map['namespace'] . '\\Controller\\' . $controller_name;
                     

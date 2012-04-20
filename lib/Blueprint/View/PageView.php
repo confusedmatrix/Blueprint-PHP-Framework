@@ -71,11 +71,11 @@ class PageView extends View {
      * @return void
      */
     public function getCss() {
-        
+    
         $html = '';
         foreach ($this->page->css as $css)
-            $html .= '<link rel="stylesheet" type="text/less" href="' . $css . '" />' . "\n";
-            
+            $html .= '<link rel="stylesheet" type="text/css" href="' . $css . '" />' . "\n";
+
         return $html;
     
     }
@@ -93,9 +93,8 @@ class PageView extends View {
         $html = '';
         foreach ($this->page->js as $js)
             $html .= '<script type="text/javascript" src="' . $js . '"></script>' . "\n";        
-    
+            
         return $html;
-        
     }
     
 }

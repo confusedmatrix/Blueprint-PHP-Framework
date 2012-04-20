@@ -118,7 +118,7 @@ class Session {
     }
 
     /**
-    * get function.
+     * get function.
      *
      * Gets a value from the user's session.
      * 
@@ -143,7 +143,7 @@ class Session {
      * @return void
      */
     public function exists($key) {
-
+    
         return isset($_SESSION[$key]);
         
     }

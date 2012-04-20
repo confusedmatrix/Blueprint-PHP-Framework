@@ -818,10 +818,16 @@ class FormField {
      * @return void
      */
     public function render() {
-        
-        $field = $this->renderLabel();
+    
+        $field = '<div class="control-group';
+        if (!$this->isValid() && $this->valid !== null)
+            $field .= ' error';
+            
+        $field .= '">';
+        $field .= $this->renderLabel();
         $field .= $this->renderField();
         $field .= $this->renderMessage();
+        $field .= '</div>';
          
         return $field;
             

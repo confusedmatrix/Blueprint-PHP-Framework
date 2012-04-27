@@ -3,6 +3,8 @@
 $c = $this->container->get('config');
 $p = $this->container->get('page');
 
+$base = VIEW_DIR;
+
 /*  
     Closure to pull config variables
     e.g $site('baseurl'); to echo the sites base URL 

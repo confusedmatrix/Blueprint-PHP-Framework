@@ -1,4 +1,4 @@
-<?php include VIEW_DIR . 'inc/header.php'; ?>
+<?php include $base . 'inc/header.php'; ?>
 
     <hr />
     <h2>Level 02 Heading</h2>
@@ -292,4 +292,4 @@
     
     </form>
 
-<?php include VIEW_DIR . 'inc/footer.php'; ?>
+<?php include $base . 'inc/footer.php'; ?>

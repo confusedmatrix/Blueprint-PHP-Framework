@@ -3,6 +3,7 @@
 namespace Sample\Model;
 
 use Blueprint\Model\Model;
+use Blueprint\Table\Table;
 
 /**
  * Test class.
@@ -63,8 +64,8 @@ class Test extends Model {
      */
     public function getRows() {
     
-        if ($out = $this->cache->get('test.getrows'))
-            return $out;
+        if ($rows = $this->cache->get('test.getrows'))
+            return $rows;
         
         // find total number of rows
         $options = array(
@@ -78,17 +79,26 @@ class Test extends Model {
         
         // return a subset the of the rows (with all fields this time)
         $options['select'] = array('*');
-        $options['limit'] = array(0,2);
+        $options['limit'] = array(0,3);
         
         $rows = $this->database->fetchRows($options);
-        
-        $out = '';
-        foreach ($rows as $row)
-            $out .= implode(", ", $row) . '<br />';
             
-        $this->cache->set('test.getrows', $out);
+        $this->cache->set('test.getrows', $rows);
         
-        return $out;
+        $table = new Table($rows);
+        $table->setColumnData(
+        
+            array(
+                't1_id'     => 'ID',
+                't1_name'   => 'Name'              
+            )
+            
+        );
+        
+        $table->setAttr('class', 'table table-striped');
+        $table->addAction('Add', 'some/link', 'btn-primary');
+        
+        return $table->render();
     
     }
 

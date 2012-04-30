@@ -57,7 +57,7 @@ class PageView extends View {
      */
     public function pageInfo($key, $default='') {
     
-        $val = !empty($this->page->$key) ? $$this->page->$key : $default;
+        $val = !empty($this->page->$key) ? $this->page->$key : $default;
         return $val;
     
     }

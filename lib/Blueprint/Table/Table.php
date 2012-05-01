@@ -127,12 +127,28 @@ class Table {
     
     }
     
+    /**
+     * setColumnData function.
+     * 
+     * @access public
+     * @param array $columns (default: array())
+     * @return void
+     */
     public function setColumnData($columns=array()) {
     
         $this->columns = $columns;
     
     }
     
+    /**
+     * addAction function.
+     * 
+     * @access public
+     * @param mixed $name
+     * @param mixed $link
+     * @param string $class (default: '')
+     * @return void
+     */
     public function addAction($name, $link, $class='') {
     
         $this->actions[] = array(
@@ -144,7 +160,43 @@ class Table {
         );
     
     }
+    
+    /**
+     * renderAction function.
+     * 
+     * @access public
+     * @param mixed $action
+     * @param mixed $row_data
+     * @return void
+     */
+    public function renderAction($action, $row_data) {
+    
+        $html = '<a class="btn ';
+        $html .= $action['class'];
+        $html .= '" href="';
+        
+        if (preg_match_all('/\{(.*?)\}/', $action['link'], $matches)) {
+        
+            foreach ($matches[1] as $key)
+                $action['link'] = preg_replace('/\{' . $key . '\}/', $row_data[$key], $action['link']);
+        
+        }
+    
+        $html .= $action['link'];
+        $html .= '">';
+        $html .= $action['name'];
+        $html .= '</a> ';
+        
+        return $html;
+    
+    }
 
+    /**
+     * render function.
+     * 
+     * @access public
+     * @return void
+     */
     public function render() {
     
         if (empty($this->data)) {
@@ -181,7 +233,7 @@ class Table {
     
                     $html .= '<td>';
                     foreach ($this->actions as $action)
-                        $html .= '<a class="btn ' . $action['class'] . '" href="' . $action['link'] . '">' . $action['name'] . '</a>';
+                        $html .= $this->renderAction($action, $row);
 
                     $html .= '</td>';
                     

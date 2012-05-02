@@ -67,6 +67,7 @@ class FormValidation {
     public $allowed_rules = array(
     
         'required',
+        'equal_to',
         'less_than',
         'greater_than',
         'between',
@@ -153,6 +154,24 @@ class FormValidation {
     public static function isRequired($value) {
     
         if (!empty($value)) 
+            return true;
+            
+        return false;
+    
+    }
+    
+    /**
+     * isEqualTo function.
+     * 
+     * @access public
+     * @static
+     * @param mixed $value
+     * @param mixed $comparison
+     * @return void
+     */
+    public static function isEqualTo($value, $comparison) {
+    
+        if ($value === $comparison)
             return true;
             
         return false;
@@ -462,7 +481,13 @@ class FormValidation {
                 $this->valid = FormValidation::isRequired($value);
                 $this->message = !empty($this->message) ? $this->message : 'Field cannot be empty';
                 break;
+            
+            case 'equal_to':
                 
+                $this->valid = FormValidation::isEqualTo($value, $this->options);
+                $this->message = !empty($this->message) ? $this->message : 'Field must be equal to '.($this->options);
+                break;
+                    
             case 'less_than':
                 
                 $this->valid = FormValidation::isLessThan($value, $this->options);

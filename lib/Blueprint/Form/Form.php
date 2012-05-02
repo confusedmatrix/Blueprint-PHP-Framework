@@ -228,8 +228,10 @@ class Form {
     
         $fields = $this->getFields();        
         foreach ($fields as $field) {
+        
+            $val = isset($values[$field->name]) ? $values[$field->name] : null;
             
-            $field->validate($values[$field->name]);
+            $field->validate($val);
             if (!$field->isValid())
                 $this->valid = false;
             

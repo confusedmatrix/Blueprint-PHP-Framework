@@ -80,7 +80,8 @@ class FormValidation {
         'email',
         'website',
         'uri',
-        'postcode'
+        'postcode',
+        'custom'
     
     );
 
@@ -434,6 +435,15 @@ class FormValidation {
     
     }
     
+    public static function checkCustomError($bool) {
+    
+        if ($bool === true)
+            return true;
+            
+        return false;
+    
+    }
+    
     /**
      * validate function.
      *
@@ -535,6 +545,12 @@ class FormValidation {
             
                 $this->valid = FormValidation::isPostcode($value);
                 $this->message = !empty($this->message) ? $this->message : 'Not a valid postcode';
+                break;
+                
+            case 'custom':
+                
+                $this->valid = FormValidation::checkCustomError($this->options);
+                $this->message = !empty($this->message) ? $this->message : 'Error';
                 break;
         
         }

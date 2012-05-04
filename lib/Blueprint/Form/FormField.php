@@ -132,7 +132,7 @@ class FormField {
         $this->attrs['type'] = $type;
         $this->checkAllowedType();
         
-        $this->name = str_replace(array('[', ']'), '', $name);
+        $this->name = $name;
         $this->attrs['name'] = $name;
         $this->label = !empty($label) ? $label : null;
             

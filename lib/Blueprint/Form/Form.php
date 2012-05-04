@@ -215,6 +215,74 @@ class Form {
     }
     
     /**
+     * getRecursiveArrayValue function.
+     *
+     * Iterates over an array to get the value from the final index
+     * 
+     * @access private
+     * @param mixed $array
+     * @param mixed $indexes
+     * @return void
+     */
+    private function getRecursiveArrayValue($array, $indexes) {
+	
+        if (empty($array[$indexes[0]]))
+            return false;
+	   
+        if (count($indexes) == 1) {
+            
+            if ($indexes[0] === 0)
+                return $array;
+
+            return $array[$indexes[0]];
+                
+        } else {
+            
+            $index = array_shift($indexes);
+            return $this->getRecursiveArrayValue($array[$index], $indexes);
+			
+		}
+		
+	}
+	
+	/**
+	 * determineFieldValue function.
+	 *
+	 * Finds the value from the GET/POST string for a given field
+	 * 
+	 * @access public
+	 * @param mixed $field
+	 * @return void
+	 */
+	public function determineFieldValue($field) {
+	   
+	   $values = $this->method == 'post' ? $_POST : $_GET;
+	   
+	   if (preg_match_all('/\[(.*?)\]/', $field->name, $matches)) {
+	       
+	       $indexes = array(0 => preg_replace('/(.*?)\[.*/', '$1', $field->name));
+	       foreach($matches[1] as $match) {
+	           
+	           if ($match == null)
+	               $match = 0;
+	           
+	           $indexes[] = $match;
+	       
+	       }
+	   
+           $val = $this->getRecursiveArrayValue($values, $indexes);
+            
+	       return isset($val) ? $val : null;
+	       
+	   } else {
+	       
+	       return isset($values[$field->name]) ? $values[$field->name] : null;
+	   
+	   }
+	
+	}
+    
+    /**
      * validate function.
      *
      * Validates rules that have been applied to each FormField object.
@@ -224,14 +292,13 @@ class Form {
      */
     public function validate() {
     
-        $values = $this->method == 'post' ? $_POST : $_GET;
-    
         $fields = $this->getFields();        
         foreach ($fields as $field) {
-        
-            $val = isset($values[$field->name]) ? $values[$field->name] : null;
+            
+            $val = $this->determineFieldValue($field);
             
             $field->validate($val);
+            
             if (!$field->isValid())
                 $this->valid = false;
             
@@ -296,13 +363,19 @@ class Form {
      * @return void
      */
     public function setSubmittedValues() {
-    
-        $values = $this->method == 'post' ? $_POST : $_GET;
         
         $fields = $this->getFields();
         foreach ($fields as $field) {
             
-            $field->setSubmittedValue($values[$field->name]);
+            if ($this->determineFieldValue($field) == null) {
+            
+				$field->setSubmittedValue(null);
+				
+			} else {		
+			
+                $field->setSubmittedValue($this->determineFieldValue($field));
+			
+			}
         
         }
 

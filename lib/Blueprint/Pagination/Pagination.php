@@ -149,7 +149,7 @@ class Pagination {
         if ($this->page != 1)
             $html .= ' href="' . $request_uri . ($this->page - 1) . '"';
             
-        $html .= '>prev</a></li>';
+        $html .= '>&lsaquo;</a></li>';
         
         // numbered links
 		for ($i = $low; $i <= $high; $i++) {
@@ -177,7 +177,7 @@ class Pagination {
         if ($this->page < $this->num_pages)
             $html .= ' href="' . $request_uri . ($this->page + 1) . '"';
 
-        $html .= '>next</a></li>';
+        $html .= '>&rsaquo;</a></li>';
 		
         // end link
 		$html .= '<li';

@@ -101,6 +101,8 @@ class Authentication {
             
         $this->session->set('logged_in', true);
         $this->session->set('user_id', $row['user_id']);
+
+        session_regenerate_id();
         
         return true;
     

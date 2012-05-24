@@ -225,10 +225,10 @@ class Form {
      * @return void
      */
     private function getRecursiveArrayValue($array, $indexes) {
-	
+    
         if (empty($array[$indexes[0]]))
             return false;
-	   
+       
         if (count($indexes) == 1) {
             
             if ($indexes[0] === 0)
@@ -240,47 +240,47 @@ class Form {
             
             $index = array_shift($indexes);
             return $this->getRecursiveArrayValue($array[$index], $indexes);
-			
-		}
-		
-	}
-	
-	/**
-	 * determineFieldValue function.
-	 *
-	 * Finds the value from the GET/POST string for a given field
-	 * 
-	 * @access public
-	 * @param mixed $field
-	 * @return void
-	 */
-	public function determineFieldValue($field) {
-	   
-	   $values = $this->method == 'post' ? $_POST : $_GET;
-	   
-	   if (preg_match_all('/\[(.*?)\]/', $field->name, $matches)) {
-	       
-	       $indexes = array(0 => preg_replace('/(.*?)\[.*/', '$1', $field->name));
-	       foreach($matches[1] as $match) {
-	           
-	           if ($match == null)
-	               $match = 0;
-	           
-	           $indexes[] = $match;
-	       
-	       }
-	   
-           $val = $this->getRecursiveArrayValue($values, $indexes);
             
-	       return isset($val) ? $val : null;
-	       
-	   } else {
-	       
-	       return isset($values[$field->name]) ? $values[$field->name] : null;
-	   
-	   }
-	
-	}
+        }
+        
+    }
+    
+    /**
+     * determineFieldValue function.
+     *
+     * Finds the value from the GET/POST string for a given field
+     * 
+     * @access public
+     * @param mixed $field
+     * @return void
+     */
+    public function determineFieldValue($field) {
+       
+        $values = $this->method == 'post' ? $_POST : $_GET;
+       
+        if (preg_match_all('/\[(.*?)\]/', $field->name, $matches)) {
+           
+            $indexes = array(0 => preg_replace('/(.*?)\[.*/', '$1', $field->name));
+            foreach($matches[1] as $match) {
+               
+                if ($match == null)
+                    $match = 0;
+               
+                    $indexes[] = $match;
+           
+            }
+       
+            $val = $this->getRecursiveArrayValue($values, $indexes);
+            
+            return isset($val) ? $val : null;
+           
+        } else {
+           
+            return isset($values[$field->name]) ? $values[$field->name] : null;
+       
+        }
+    
+    }
     
     /**
      * validate function.
@@ -369,13 +369,13 @@ class Form {
             
             if ($this->determineFieldValue($field) == null) {
             
-				$field->setSubmittedValue(null);
-				
-			} else {		
-			
+                $field->setSubmittedValue(null);
+                
+            } else {        
+            
                 $field->setSubmittedValue($this->determineFieldValue($field));
-			
-			}
+            
+            }
         
         }
 

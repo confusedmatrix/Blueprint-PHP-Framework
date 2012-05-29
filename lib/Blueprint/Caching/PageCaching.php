@@ -71,10 +71,10 @@ class PageCaching extends Caching {
                 
                 if (file_exists($this->cache_file) && ((time() - $this->expiry) < filemtime($this->cache_file))) {
 
-                     echo file_get_contents($this->cache_file);
+                    echo file_get_contents($this->cache_file);
                     exit;
 
-                  }
+                }
             
             }
             

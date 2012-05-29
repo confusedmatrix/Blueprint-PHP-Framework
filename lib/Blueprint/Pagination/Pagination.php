@@ -97,6 +97,18 @@ class Pagination {
     }
     
     /**
+     * determineBaseUrl function.
+     * 
+     * @access protected
+     * @return void
+     */
+    protected function determineBaseUrl() {
+    
+        return preg_replace('/(\/page)?\/([0-9]+)$/', '', $_SERVER['REQUEST_URI']) . '/page/';
+        
+    }
+    
+    /**
      * renderPagination function.
      * 
      * @access public
@@ -107,7 +119,7 @@ class Pagination {
         if ($this->num_pages <= 1)
             return '';
     
-        $request_uri = preg_replace('/(\/page)?\/([0-9]+)$/', '', $_SERVER['REQUEST_URI']) . '/page/';
+        $request_uri = $this->determineBaseUrl();
         
         $high = $this->page + 4;
         $low = $this->page - 4;
@@ -208,7 +220,7 @@ class Pagination {
         if ($this->num_pages <= 1)
             return '';
 
-        $request_uri = preg_replace('/(\/page)?\/([0-9]+)$/', '', $_SERVER['REQUEST_URI']) . '/page/';
+        $request_uri = $this->determineBaseUrl();
 
         $html .= '<ul class="pager">';
 

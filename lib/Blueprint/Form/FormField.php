@@ -159,7 +159,7 @@ class FormField {
         
         // add type as a css class
         $class = $this->getAttr('class');
-        $this->setAttr('class', implode(' ', array($class, $this->attrs['type'])));
+        $this->setAttr('class', trim(implode(' ', array($class, $this->attrs['type']))));
         
     }
     

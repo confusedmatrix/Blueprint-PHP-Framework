@@ -329,7 +329,7 @@ class FormField {
      */
     public function setSubmittedValue($value) {
         
-        if (in_array($this->attrs['type'], array('checkbox', 'select'))) {
+        if (in_array($this->attrs['type'], array('checkbox', 'radio', 'select'))) {
             
             $this->selected = array();
             if (is_array($value)) {

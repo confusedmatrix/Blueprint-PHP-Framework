@@ -41,14 +41,6 @@ class Database {
     private $dbh = NULL;
     
     /**
-     * store
-     * 
-     * @var mixed
-     * @access public
-     */
-    public $store;
-    
-    /**
      * __construct function.
      *
      * Loads dependencies and opens connection based on config settings.

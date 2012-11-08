@@ -325,11 +325,11 @@ class Router {
         if (!empty($this->route_maps)) {
         
             foreach ($this->route_maps as $map) {
-            
-                if ($this->routeByDefault($map))
-                    break;
                 
                 if ($this->routeByRegex($map))
+                    break;
+
+                if ($this->routeByDefault($map))
                     break;
             
             }

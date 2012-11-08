@@ -103,8 +103,8 @@ class Pagination {
      * @return void
      */
     protected function determineBaseUrl() {
-    
-        return preg_replace('/(\/page)?\/([0-9]+)$/', '', $_SERVER['REQUEST_URI']) . '/page/';
+
+        return preg_replace('/(\/page)?\/([0-9]+)(\/?)$/', '$3', $_SERVER['REQUEST_URI']) . 'page/';
         
     }
     

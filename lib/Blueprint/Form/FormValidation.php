@@ -252,7 +252,7 @@ class FormValidation {
      */
     public static function isShorterThan($value, $max) {
     
-        if (strlen($values) < $max)
+        if (strlen($value) < $max)
             return true;
             
         return false;
@@ -272,7 +272,7 @@ class FormValidation {
      */
     public static function isLongerThan($value, $min) {
     
-        if (strlen($values) > $min)
+        if (strlen($value) > $min)
             return true;
             
         return false;
@@ -294,7 +294,7 @@ class FormValidation {
      */
     public static function isLengthBetween($value, $min, $max) {
         
-        $length = strlen($values);
+        $length = strlen($value);
         if ($length >= $min && $length <= $max)
             return true;
             

@@ -620,16 +620,17 @@ class FormField {
      */
     private function renderCheckboxFields() {
         
-        $field = '<ul class="field_options">';
+        $field = '<ul class="field-options">';
         foreach ($this->options as $k => $v) {
 
-            $field .= '<li><input ';
+            $field .= '<li>';
+            $field .= '<label class="' . $this->attrs['type'] . '"><input ';
             $field .= $this->renderAttrs(array('value')); // exclude value attribute
             $field .= ' value="';
             $field .= $v;
             $field .= '"';
             $field .= $this->isSelected($k) ? ' checked="checked"' : '';
-            $field .= ' /> '.$k.'</li>'."\n";
+            $field .= ' /> '.$k.'</label></li>'."\n";
             
         }
         $field .= '</ul>';
@@ -758,7 +759,9 @@ class FormField {
         $label = '';
         if (!empty($this->label)) {
 
-            $label .= '<label for="'.$this->name.'">'.$this->label;
+            $label .= '<label for="' . $this->name . '"';
+            $label .= in_array($this->attrs['type'], array('checkbox', 'radio')) ? ' class="group-label"' : '';
+            $label .= '>' . $this->label;
             
             if (!empty($this->validation)) {
                 foreach ($this->validation as $validation) {
@@ -824,8 +827,10 @@ class FormField {
             $field .= ' error';
             
         $field .= '">';
+        
         $field .= $this->renderLabel();
         $field .= $this->renderField();
+
         $field .= $this->renderMessage();
         $field .= '</div>';
          

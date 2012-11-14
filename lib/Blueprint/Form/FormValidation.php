@@ -191,7 +191,7 @@ class FormValidation {
      */
     public static function isLessThan($value, $max) {
     
-        if ($this->isNumeric($value) && $value < $max)
+        if (empty($value) || ($this->isNumeric($value) && $value < $max))
             return true;
             
         return false;
@@ -211,7 +211,7 @@ class FormValidation {
      */
     public static function isGreaterThan($value, $min) {
     
-        if ($this->isNumeric($value) && $value > $min)
+        if (empty($value) || ($this->isNumeric($value) && $value > $min))
             return true;
             
         return false;
@@ -232,7 +232,7 @@ class FormValidation {
      */
     public static function isBetween($value, $min, $max) {
     
-        if ($this->isNumeric($value) && $value >= $min && $value <= $max)
+        if (empty($value) || ($this->isNumeric($value) && $value >= $min && $value <= $max))
             return true;
             
         return false;
@@ -252,7 +252,7 @@ class FormValidation {
      */
     public static function isShorterThan($value, $max) {
     
-        if (strlen($value) < $max)
+        if (empty($value) || strlen($value) < $max)
             return true;
             
         return false;
@@ -272,7 +272,7 @@ class FormValidation {
      */
     public static function isLongerThan($value, $min) {
     
-        if (strlen($value) > $min)
+        if (empty($value) || strlen($value) > $min)
             return true;
             
         return false;
@@ -295,7 +295,7 @@ class FormValidation {
     public static function isLengthBetween($value, $min, $max) {
         
         $length = strlen($value);
-        if ($length >= $min && $length <= $max)
+        if (empty($value) || ($length >= $min && $length <= $max))
             return true;
             
         return false;
@@ -314,7 +314,7 @@ class FormValidation {
      */
     public static function isDate($date) {
     
-        if (strtotime($date))
+        if (empty($date) || strtotime($date))
             return true;
             
         return false;
@@ -333,7 +333,7 @@ class FormValidation {
      */
     public static function isNumeric($value) {
     
-        if (is_numeric($value))
+        if (empty($value) || is_numeric($value))
             return true;
             
         return false;
@@ -352,7 +352,7 @@ class FormValidation {
      */
     public static function isAlphabetic($value) {
     
-        if (ctype_alpha($value))
+        if (empty($value) || ctype_alpha($value))
             return true;
             
         return false;
@@ -371,7 +371,7 @@ class FormValidation {
      */
     public static function isAlphaNumeric($value) {
     
-        if (ctype_alnum($value))
+        if (empty($value) || ctype_alnum($value))
             return true;
             
         return false;
@@ -390,7 +390,7 @@ class FormValidation {
      */
     public static function isEmail($email) {
     
-        if (preg_match('/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i', $email))
+        if (empty($email) || preg_match('/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i', $email))
             return true;
             
         return false;
@@ -409,7 +409,7 @@ class FormValidation {
      */
     public static function isWebsite($website) {
     
-        if (preg_match('/^[A-Z0-9-]+\.[A-Z0-9-]+/i', $website)) // needs work.
+        if (empty($website) || preg_match('/^[A-Z0-9-]+\.[A-Z0-9-]+/i', $website)) // needs work.
             return true;
             
         return false;
@@ -428,7 +428,7 @@ class FormValidation {
      */
     public static function isURI($uri) {
     
-        if (preg_match('/^[^\s:\/?#]+:(?:\/{2,3})?[^\s.\/?#]+(?:\.[^\s.\/?#]+)*(?:\/[^\s?#]*\??[^\s?#]*(#[^\s#]*)?)?$/i', $uri))
+        if (empty($uri) || preg_match('/^[^\s:\/?#]+:(?:\/{2,3})?[^\s.\/?#]+(?:\.[^\s.\/?#]+)*(?:\/[^\s?#]*\??[^\s?#]*(#[^\s#]*)?)?$/i', $uri))
             return true;
             
         return false;
@@ -447,7 +447,7 @@ class FormValidation {
      */
     public static function isPostcode($postcode) {
     
-        if (preg_match('/[A-Z]{1,2}[0-9]{1,2}[A-Z]?\s?[0-9][A-Z]{2}/i', $postcode))
+        if (empty($postcode) || preg_match('/[A-Z]{1,2}[0-9]{1,2}[A-Z]?\s?[0-9][A-Z]{2}/i', $postcode))
             return true;
             
         return false;
@@ -456,7 +456,7 @@ class FormValidation {
     
     public static function checkCustomError($bool) {
     
-        if ($bool === true)
+        if (empty($bool) || $bool === true)
             return true;
             
         return false;

@@ -212,6 +212,9 @@ class Database {
             
             $data = array();
             $data = $q->fetch(\PDO::FETCH_ASSOC);
+
+            if (count($options['select']) == 1 && $options['select'][0] != '*')
+                $data = $data[$options['select'][0]];
                         
             if (!empty($data))
                 return $data;
@@ -248,14 +251,22 @@ class Database {
             $data = array();
             while ($result = $q->fetch(\PDO::FETCH_ASSOC)) {
                 
-                $array = array();
-                foreach ($result as $key => $val) {
-                
-                    $array[$key] = $val;
-                
-                }        
-                
-                $data[] = $array;            
+                if (count($options['select']) == 1 && $options['select'][0] != '*') {
+                    
+                    $data[] = $result[$options['select'][0]];
+
+                } else {
+
+                    $array = array();
+                    foreach ($result as $key => $val) {
+                    
+                        $array[$key] = $val;
+                    
+                    }        
+                    
+                    $data[] = $array;
+
+                }           
             
             }
                         

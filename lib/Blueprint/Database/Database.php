@@ -214,7 +214,7 @@ class Database {
             $data = $q->fetch(\PDO::FETCH_ASSOC);
 
             if (count($options['select']) == 1 && $options['select'][0] != '*')
-                $data = $data[$options['select'][0]];
+                $data = $data[key($data)];
                         
             if (!empty($data))
                 return $data;
@@ -244,7 +244,7 @@ class Database {
         try {
         
             $s = $this->buildSQLSelectQuery($options);
-            
+
             $q = $this->dbh->prepare($s['sql']);
             $q->execute($s['replacements']);
             
@@ -253,7 +253,7 @@ class Database {
                 
                 if (count($options['select']) == 1 && $options['select'][0] != '*') {
                     
-                    $data[] = $result[$options['select'][0]];
+                    $data[] = $result[key($result)];
 
                 } else {
 

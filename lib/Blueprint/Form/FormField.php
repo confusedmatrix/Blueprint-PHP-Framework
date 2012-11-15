@@ -335,11 +335,13 @@ class FormField {
             if (is_array($value)) {
             
                 foreach ($value as $v)
-                    $this->setSelected(array_search($v, $this->options));
-            
+                    //$this->setSelected(array_search($v, $this->options));
+                    $this->setSelected($v);
+
             } else {
             
-                $this->setSelected(array_search($value, $this->options));
+                //$this->setSelected(array_search($value, $this->options));
+                $this->setSelected($value);
             
             }
         
@@ -627,10 +629,10 @@ class FormField {
             $field .= '<label class="' . $this->attrs['type'] . '"><input ';
             $field .= $this->renderAttrs(array('value')); // exclude value attribute
             $field .= ' value="';
-            $field .= $v;
+            $field .= $k;
             $field .= '"';
             $field .= $this->isSelected($k) ? ' checked="checked"' : '';
-            $field .= ' /> '.$k.'</label></li>'."\n";
+            $field .= ' /> '.$v.'</label></li>'."\n";
             
         }
         $field .= '</ul>';
@@ -671,11 +673,11 @@ class FormField {
         foreach ($this->options as $k => $v) {
             
             $field .= '<option value="';
-            $field .= $v;
+            $field .= $k;
             $field .= '"';
             $field .= $this->isSelected($k) ? ' selected="selected"' : '';
             $field .= '>';
-            $field .= $k;
+            $field .= $v;
             $field .= '</option>'."\n";
             
         }

@@ -103,6 +103,8 @@ class Router {
         
         if (strpos($_SERVER['REQUEST_URI'], $cfg->base) === 0)
             $this->url = substr($_SERVER['REQUEST_URI'], strlen($cfg->base));
+
+        $this->url = preg_replace('/\?.*$/', '', $this->url);
             
     }
     

@@ -147,15 +147,19 @@ class Table {
      * @param mixed $name
      * @param mixed $link
      * @param string $class (default: '')
+     * @param mixed $attrs
+     * @param mixed $action_ids
      * @return void
      */
-    public function addAction($name, $link, $class='') {
+    public function addAction($name, $link, $class='', $attrs=array(), $action_ids=false) {
     
         $this->actions[] = array(
         
             'name'  => $name,
             'link'  => $link,
-            'class' => $class
+            'class' => $class,
+            'attrs' => $attrs,
+            'ids'   => $action_ids
         
         );
     
@@ -183,7 +187,18 @@ class Table {
         }
     
         $html .= $action['link'];
-        $html .= '">';
+        $html .= '"';
+        foreach ($action['attrs'] as $k => $v) {
+            
+            if (preg_match_all('/\{(.*?)\}/', $v, $matches))
+                foreach ($matches[1] as $key)
+                    $v = preg_replace('/\{' . $key . '\}/', $row_data[$key], $v);
+
+            $html .= ' ' . $k . '="' . $v . '"';
+
+        }
+        
+        $html .= '>';
         $html .= $action['name'];
         $html .= '</a> ';
         
@@ -223,7 +238,7 @@ class Table {
 
             $html .= '<tbody>';
             
-            foreach ($this->data as $row) {
+            foreach ($this->data as $key => $row) {
                 
                 $html .= '<tr>';
                 foreach ($this->columns as $field => $field_name)
@@ -232,8 +247,12 @@ class Table {
                 if (!empty($this->actions)) {
     
                     $html .= '<td>';
-                    foreach ($this->actions as $action)
-                        $html .= $this->renderAction($action, $row);
+                    foreach ($this->actions as $action) {
+                        
+                        if (!is_array($action['ids']) || (in_array($key, $action['ids'])))
+                            $html .= $this->renderAction($action, $row);
+
+                    }
 
                     $html .= '</td>';
                     

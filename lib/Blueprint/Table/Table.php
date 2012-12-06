@@ -246,7 +246,7 @@ class Table {
                 
                 if (!empty($this->actions)) {
     
-                    $html .= '<td>';
+                    $html .= '<td class="table-actions">';
                     foreach ($this->actions as $action) {
                         
                         if (!is_array($action['ids']) || (in_array($key, $action['ids'])))

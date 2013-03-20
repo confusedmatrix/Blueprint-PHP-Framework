@@ -176,7 +176,7 @@ class FormField {
         if (in_array($this->attrs['type'], $this->allowed_types))
             return true;
         else 
-            throw new Exception('Field type ('.$this->attrs['type'].') not recognised', 100);
+            throw new \Exception('Field type ('.$this->attrs['type'].') not recognised', 100);
     
     }
     

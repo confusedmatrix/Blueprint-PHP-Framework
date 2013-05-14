@@ -100,9 +100,10 @@ class Router {
         $this->app = $app;
         
         $cfg = $this->app->get('config');
+        $request = $this->app->get('request');
         
-        if (strpos($_SERVER['REQUEST_URI'], $cfg->base) === 0)
-            $this->url = substr($_SERVER['REQUEST_URI'], strlen($cfg->base));
+        if (strpos($request->server('REQUEST_URI'), $cfg->base) === 0)
+            $this->url = substr($request->server('REQUEST_URI'), strlen($cfg->base));
 
         $this->url = preg_replace('/\?.*$/', '', $this->url);
             
@@ -329,7 +330,7 @@ class Router {
             foreach ($this->route_maps as $map) {
                 
                 if ($this->routeByRegex($map))
-                    break;
+                   break;
 
                 if ($this->routeByDefault($map))
                     break;

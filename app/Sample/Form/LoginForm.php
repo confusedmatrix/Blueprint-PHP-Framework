@@ -19,10 +19,11 @@ class LoginForm extends Form {
      * @access public
      * @return void
      */
-    public function __construct() {
+    public function __construct($request) {
         
         parent::__construct('', 'post', array());
         
+        $this->setRequest($request);
         $this->buildForm();
         
     }

@@ -23,10 +23,12 @@ spl_autoload_register('Blueprint\Autoloader\Autoloader::autoload');
 use Blueprint\Logging\Logging;
 use Blueprint\Container\Container;
 use Blueprint\Config\Config;
+use Blueprint\Http\Request;
 use Blueprint\Database\Database;
 use Blueprint\Session\Session;
 use Blueprint\Authentication\Authentication;
 use Blueprint\Page\Page;
+use Blueprint\Utilities\Utilities;
 use Blueprint\Caching;
 use Blueprint\Router\Router;
 
@@ -48,14 +50,17 @@ $config = new Config();
 $config->loadConfig(CONF_DIR . 'config.php'); // tell it where config file lives.
 $app->set('config', $config);
 
+$app->set('request', new Request($_GET, $_POST, $_COOKIE, $_FILES, $_SERVER));
+
 $app->set('database', new Database($app->get('config'))); // pass config dependency to the database
 $app->set('session', new Session($app->get('config'), $app->get('database')));
 
 $app->set('authentication', new Authentication($app->get('database'), $app->get('session')));
 
 $app->set('page', new Page($app->get('config')));
-$app->set('page_caching', new Caching\PageCaching($app->get('config'), PAGE_CACHE_DIR));
+$app->set('page_caching', new Caching\PageCaching($app->get('request'), $app->get('config'), PAGE_CACHE_DIR));
 $app->set('fragment_caching', new Caching\FragmentCaching($app->get('config'), FRAGMENT_CACHE_DIR));
+$app->set('utilities', new Utilities());
 
 // Pass the router all the core dependencies
 $router = new Router($app);

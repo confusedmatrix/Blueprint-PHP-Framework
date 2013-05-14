@@ -23,6 +23,7 @@ class Login extends Model {
     
         parent::setContainer($container);
         
+        $this->request = $this->container->get('request');
         $this->form = $this->container->get('form');
         $this->session = $this->container->get('session');
         $this->auth = $this->container->get('authentication');
@@ -43,7 +44,7 @@ class Login extends Model {
         
         } else {
         
-            $this->form = new LoginForm();
+            $this->form = new LoginForm($this->request);
             return $this->checkLogin();
         
         }    
@@ -65,7 +66,7 @@ class Login extends Model {
             
             if ($this->form->isValid()) {
             
-                if ($this->auth->login($_POST['user_name'], $_POST['password']))
+                if ($this->auth->login($this->request->post('user_name'), $this->request->post('password')))
                     return 'Successful login';
             
             }

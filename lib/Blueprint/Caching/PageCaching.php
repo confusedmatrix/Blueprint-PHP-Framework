@@ -40,10 +40,11 @@ class PageCaching extends Caching {
      * @param mixed $cache_dir
      * @return void
      */
-    public function __construct($config, $cache_dir) {
+    public function __construct($request, $config, $cache_dir) {
     
         parent::__construct($config, $cache_dir);
         
+        $this->request = $request;
         $this->status = $this->config->defaults['page_caching']['status'];
         $this->expiry = $this->config->defaults['page_caching']['expiry'];
     
@@ -60,14 +61,15 @@ class PageCaching extends Caching {
      */
     public function startCachingFile() {
         
-        $filename = str_replace("/", "", $_SERVER["REQUEST_URI"]);
-        $this->cache_file = $this->cache_dir . $filename . ".cache";
+        $filename = str_replace('/', '', $this->request->server('REQUEST_URI'));
+        $this->cache_file = $this->cache_dir . $filename . '.cache';
         
         try {
-                
-            if ($this->status === true && empty($_POST)) {
+            
+            $post = $this->request->post();
+            if ($this->status === true && empty($post)) {
                     
-                ob_start("ob_gzhandler");
+                ob_start('ob_gzhandler');
                 
                 if (file_exists($this->cache_file) && ((time() - $this->expiry) < filemtime($this->cache_file))) {
 
@@ -101,8 +103,9 @@ class PageCaching extends Caching {
     public function stopCachingFile() {
         
         try {
-        
-            if ($this->status === true && empty($_POST)) {
+            
+            $post = $this->request->post();
+            if ($this->status === true && empty($post)) {
                 
                 file_put_contents($this->cache_file, ob_get_contents());
                 ob_end_flush();
@@ -111,8 +114,8 @@ class PageCaching extends Caching {
             
         } catch (Exception $e) {
             
-            echo "Could not stop caching file using function stopCachingFile\n
-                    The following exception was given: ".$e;
+            echo 'Could not stop caching file using function stopCachingFile\n
+                    The following exception was given: '.$e;
             
             exit;
             

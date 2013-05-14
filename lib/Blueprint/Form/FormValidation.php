@@ -456,7 +456,7 @@ class FormValidation {
     
     public static function checkCustomError($bool) {
     
-        if (empty($bool) || $bool === true)
+        if ($bool === true)
             return true;
             
         return false;

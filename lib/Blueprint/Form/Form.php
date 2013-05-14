@@ -60,6 +60,16 @@ class Form {
     public $valid = null;
 
     /**
+     * values
+     * 
+     * (default value: array())
+     * 
+     * @var array
+     * @access public
+     */
+    public $values = array();
+
+    /**
      * __construct function.
      *
      * Sets the form handler, method and attributes.
@@ -83,6 +93,24 @@ class Form {
         }
     
     }
+
+    /**
+     * setRequest function.
+     *
+     * Sets the Request object and gets form values from it
+     * 
+     * @access public
+     * @param bool $submit (default: false)
+     * @return void
+     */
+    public function setRequest($request) {
+
+        $this->request = $request;
+        
+        $method = $this->method;
+        $this->values = $this->request->$method();
+
+    }
     
     /**
      * isSubmitted function.
@@ -96,10 +124,8 @@ class Form {
      */
     public function isSubmitted($submit=false) {
     
-        $values = $this->method == 'post' ? $_POST : $_GET;
-    
-        if (empty($submit) && !empty($values) || 
-            !empty($submit) && !empty($values[$submit]))
+        if (empty($submit) && !empty($this->values) || 
+            !empty($submit) && !empty($this->values[$submit]))
             return true;
         else
             return false;
@@ -198,7 +224,7 @@ class Form {
     private function getFields() {
     
         $fields = get_object_vars($this);
-        unset($fields['handler'], $fields['method'], $fields['attrs'], $fields['valid']);
+        unset($fields['handler'], $fields['method'], $fields['attrs'], $fields['valid'], $fields['request'], $fields['values']);
     
         return $fields;
     
@@ -256,8 +282,6 @@ class Form {
      */
     public function determineFieldValue($field) {
        
-        $values = $this->method == 'post' ? $_POST : $_GET;
-       
         if (preg_match_all('/\[(.*?)\]/', $field->name, $matches)) {
            
             $indexes = array(0 => preg_replace('/(.*?)\[.*/', '$1', $field->name));
@@ -270,13 +294,13 @@ class Form {
            
             }
        
-            $val = $this->getRecursiveArrayValue($values, $indexes);
+            $val = $this->getRecursiveArrayValue($this->values, $indexes);
             
             return isset($val) ? $val : null;
            
         } else {
            
-            return isset($values[$field->name]) ? $values[$field->name] : null;
+            return isset($this->values[$field->name]) ? $this->values[$field->name] : null;
        
         }
     

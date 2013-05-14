@@ -72,8 +72,9 @@ class Pagination {
      * @param mixed $length
      * @return void
      */
-    public function __construct($page, $length, $num_records) {
+    public function __construct($request, $page, $length, $num_records) {
         
+        $this->request = $request;
         $this->page = $page;
         
         $this->start = ($this->page - 1) * $length;
@@ -103,8 +104,8 @@ class Pagination {
      * @return void
      */
     protected function determineBaseUrl() {
-
-        return preg_replace('/(\/page)?\/([0-9]+)(\/?)$/', '$3', $_SERVER['REQUEST_URI']) . 'page/';
+    
+        return preg_replace('/(\/page)?\/([0-9]+)(\/?)$/', '$3', $this->request->server('REQUEST_URI')) . 'page/';
         
     }
     
@@ -139,7 +140,7 @@ class Pagination {
         }
         
         $html = '<div class="pagination">';
-        $html .= '</ul>';
+        $html .= '<ul>';
         
         // start link
         $html .= '<li';

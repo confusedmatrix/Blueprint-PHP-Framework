@@ -41,6 +41,7 @@ class FormField {
     
         'text',
         'password',
+        'date',
         'hidden',
         'textarea',
         'checkbox',
@@ -492,6 +493,11 @@ class FormField {
                 
                 $field .= $this->renderPasswordField();
                 break;
+
+            case 'date':
+                
+                $field .= $this->renderDateField();
+                break;
                 
             case 'hidden':
                 
@@ -571,6 +577,21 @@ class FormField {
      * @return void
      */
     private function renderPasswordField() {
+    
+        // same as renderTextField()
+        return $this->renderTextField();
+    
+    }
+
+    /**
+     * renderDateField function.
+     *
+     * Renders a date field.
+     * 
+     * @access private
+     * @return void
+     */
+    private function renderDateField() {
     
         // same as renderTextField()
         return $this->renderTextField();

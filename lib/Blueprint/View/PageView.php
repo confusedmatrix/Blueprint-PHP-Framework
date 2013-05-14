@@ -96,5 +96,113 @@ class PageView extends View {
             
         return $html;
     }
+
+    /**
+     * renderFlashMessage function.
+     *
+     * Renders the HTML for flash messages that might be associated with form errors etc
+     * 
+     * @access public
+     * @param mixed $flash
+     * @return void
+     */
+    public function renderFlashMessage($flash) {
+    
+        if (empty($flash['message']))
+            return '';
+        
+        $html = '<div class="alert';
+        
+        switch ($flash['type']) {
+        
+            case 'error':
+            
+                $html .= ' alert-error';
+                break;
+                
+            case 'success':
+            
+                $html .= ' alert-success';
+                break;
+                
+            case 'info':
+            
+                $html .= ' alert-info';
+                break;
+                
+            default:
+            
+                $html .= '';                
+        
+        }
+        
+        $html .= '">' . $flash['message'] . '</div>';
+        
+        return $html;
+    
+    }
+    
+    /**
+     * renderBreadcrumbs function.
+     *
+     * Renders the HTML for breadcrumbs
+     * 
+     * @access public
+     * @param mixed $breadcrumbs
+     * @return void
+     */
+    public function renderBreadcrumbs($breadcrumbs) {
+        
+        if (empty($breadcrumbs))
+            return '';
+      
+        $html = '<ul class="breadcrumb">';
+        foreach ($breadcrumbs as $k => $bc) {
+        
+            if ($k > 0)
+                $html .= '<span class="divider">/</span>';
+
+            $html .= '<li>';
+            if (is_array($bc)) {
+                
+                $html .= '<a href="' . $bc[1] . '">' . $bc[0] . '</a> ';
+
+            } else {
+      
+                $html .= $bc;
+      
+            } 
+      
+            $html .= '</li> ';
+
+        }
+    
+        $html .= '</ul>';
+        
+        return $html;
+        
+    }
+
+    /**
+     * render function.
+     *
+     * Adds breadcrumbs and flash message to scope before calling render
+     * 
+     * @access public
+     * @param mixed $template
+     * @param boolean $vars
+     * @return void
+     */
+    public function render($template, $vars=false) {
+    
+        $breadcrumbs = $this->pageInfo('breadcrumbs', false);
+        $vars['breadcrumbs'] = $this->renderBreadcrumbs($breadcrumbs);
+    
+        $flash_message = $this->pageInfo('flash_message', false);
+        $vars['flash_message'] = $this->renderFlashMessage($flash_message);
+        
+        return parent::render($template, $vars);
+    
+    }
     
 }

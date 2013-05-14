@@ -73,6 +73,19 @@ class Page {
      * @access public
      */
     public $js = array();
+
+    /**
+     * flash_message
+     * 
+     * @var mixed
+     * @access public
+     */
+    public $flash_message = array(
+    
+        'type'      => '',
+        'message'   => ''
+        
+    );
     
     /**
      * __construct function.
@@ -158,6 +171,25 @@ class Page {
     
         if ($key = array_search($file, $this->file))
             unset($this->css[$key]);
+    
+    }
+    
+    /**
+     * setFlashMessage function.
+     * 
+     * @access public
+     * @param mixed $message
+     * @param mixed $type
+     * @return void
+     */
+    public function setFlashMessage($message, $type) {
+    
+        $this->flash_message = array(
+            
+            'type'      => $type,
+            'message'   => $message
+            
+        );
     
     }
 
